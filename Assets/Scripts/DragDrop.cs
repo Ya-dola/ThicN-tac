@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class DragDrop : MonoBehaviour
@@ -8,10 +9,20 @@ public class DragDrop : MonoBehaviour
 
     public bool snapPlcmnt = false;
 
+    public MoveAxisEnum moveAxis = MoveAxisEnum.ZAxis;
+
     [Header("Debug")]
     public GameObject selectedObject;
 
     public Camera mainCam;
+
+    // Movement Directions Enum
+    public enum MoveAxisEnum
+    {
+        XAxis,
+        YAxis,
+        ZAxis
+    }
 
     private void Awake()
     {
@@ -44,14 +55,27 @@ public class DragDrop : MonoBehaviour
             {
                 var worldPosition = getWorldMouseZPos();
 
+                var dropPos = Vector3.zero;
+
                 // Drops the Object according to Mouse Position
-                var dropPos = new Vector3(worldPosition.x, 0f, worldPosition.z);
+                switch (moveAxis)
+                {
+                    // Y Axis
+                    case MoveAxisEnum.YAxis:
+                        dropPos = new Vector3(worldPosition.x, worldPosition.y, 0f);
+                        break;
+                    // z Axis
+                    default:
+                        dropPos = new Vector3(worldPosition.x, 0f, worldPosition.z);
+                        break;
+                }
 
                 if (snapPlcmnt)
                     dropPos = snapPos(dropPos);
 
                 selectedObject.transform.position = dropPos;
 
+                // Reset after Dropping the Object
                 selectedObject = null;
                 Cursor.visible = true;
             }
@@ -61,9 +85,20 @@ public class DragDrop : MonoBehaviour
         if (selectedObject != null)
         {
             var worldPosition = getWorldMouseZPos();
+            var movePos = Vector3.zero;
 
             // Move Selected Object according to Mouse Position
-            var movePos = new Vector3(worldPosition.x, .25f, worldPosition.z);
+            switch (moveAxis)
+            {
+                // Y Axis
+                case MoveAxisEnum.YAxis:
+                    movePos = new Vector3(worldPosition.x, worldPosition.y, -0.25f);
+                    break;
+                // z Axis
+                default:
+                    movePos = new Vector3(worldPosition.x, 0.25f, worldPosition.z);
+                    break;
+            }
 
             if (snapMvmnt)
                 movePos = snapPos(movePos);
@@ -82,9 +117,22 @@ public class DragDrop : MonoBehaviour
         return mainCam.ScreenToWorldPoint(position);
     }
 
+    // Get snap positions according to direction of movement
     private Vector3 snapPos(Vector3 freeFormPos)
     {
-        return new Vector3(Mathf.Round(freeFormPos.x), freeFormPos.y, Mathf.Round(freeFormPos.z));
+        Vector3 returnVec = Vector3.zero;
+
+        switch (moveAxis)
+        {
+            case MoveAxisEnum.YAxis:
+                returnVec = new Vector3(Mathf.Round(freeFormPos.x), Mathf.Round(freeFormPos.y), freeFormPos.z);
+                break;
+            default:
+                returnVec = new Vector3(Mathf.Round(freeFormPos.x), freeFormPos.y, Mathf.Round(freeFormPos.z));
+                break;
+        }
+
+        return returnVec;
     }
 
     // Raycast from Camera 
