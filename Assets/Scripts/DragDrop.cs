@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class DragDrop : MonoBehaviour
 {
+    [Header("Raycast Tag and Layers")]
+    public string selectableTag = "Selectable";
+
+    public float raycastMaxDist = 100f;
+    public LayerMask rayCastLayers;
+
     [Header("Enable Snapping")]
     public bool snapMvmnt = false;
 
@@ -45,7 +51,7 @@ public class DragDrop : MonoBehaviour
                 // If Raycast is Hitting an object's collider
                 if (hit.collider != null)
                 {
-                    if (!hit.collider.CompareTag("Selectable"))
+                    if (!hit.collider.CompareTag(selectableTag))
                         return;
 
                     // Assigning the object that was selected as the selected object until reset
@@ -154,7 +160,8 @@ public class DragDrop : MonoBehaviour
         Vector3 worldMousePosNear = mainCam.ScreenToWorldPoint(screenMousePosNear);
 
         // Casting Ray from Camera in the Direction away from where the Camera is looking
-        Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit);
+        Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit,
+            raycastMaxDist, rayCastLayers.value);
 
         return hit;
     }

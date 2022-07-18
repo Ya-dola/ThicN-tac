@@ -11,7 +11,7 @@ public class GridDrop : DragDrop
     public List<Transform> gridPositions = new List<Transform>();
 
     [Header("Debug")]
-    public Vector3 targetPosition;
+    public Vector3 cursorPosition;
 
     // Update is called once per frame
     private void Update()
@@ -60,6 +60,9 @@ public class GridDrop : DragDrop
 
                 selectedObject.transform.position = dropPos;
 
+                // Snapping Object to Grid Points
+                SnapToGridPoint(ref dropPos);
+
                 // Reset after Dropping the Object
                 selectedObject = null;
                 Cursor.visible = true;
@@ -90,19 +93,25 @@ public class GridDrop : DragDrop
 
             selectedObject.transform.position = movePos;
 
-            // Updating Target Pos for Debugging 
-            targetPosition = movePos;
+            // Updating Cursor Pos for Debugging 
+            cursorPosition = movePos;
 
             // Snapping Object when close to Grid Points
-            float smallestDistanceSquared = snapDistance * snapDistance;
+            SnapToGridPoint(ref movePos);
+        }
+    }
 
-            foreach (Transform gridPos in gridPositions)
+    public void SnapToGridPoint(ref Vector3 pos)
+    {
+        // Snapping Object when close to Grid Points
+        float smallestDistanceSquared = snapDistance * snapDistance;
+
+        foreach (Transform gridPos in gridPositions)
+        {
+            if ((gridPos.position - pos).sqrMagnitude < smallestDistanceSquared)
             {
-                if ((gridPos.position - movePos).sqrMagnitude < smallestDistanceSquared)
-                {
-                    selectedObject.transform.position = gridPos.position;
-                    smallestDistanceSquared = (gridPos.position - movePos).sqrMagnitude;
-                }
+                selectedObject.transform.position = gridPos.position;
+                smallestDistanceSquared = (gridPos.position - pos).sqrMagnitude;
             }
         }
     }

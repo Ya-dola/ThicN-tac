@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 81738529}
   - component: {fileID: 81738528}
   - component: {fileID: 81738530}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Sphere
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 263173329}
   - component: {fileID: 263173328}
   - component: {fileID: 263173331}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Cube_5
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -652,7 +652,7 @@ GameObject:
   - component: {fileID: 458666000}
   - component: {fileID: 458665999}
   - component: {fileID: 458666001}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Sphere_5
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 514795636}
   - component: {fileID: 514795635}
   - component: {fileID: 514795637}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Cube_2
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -878,6 +878,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0828b996a7897e479f72b7983455b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectableTag: Selectable
+  raycastMaxDist: 100
+  rayCastLayers:
+    serializedVersion: 2
+    m_Bits: 33554432
   snapMvmnt: 0
   snapPlcmnt: 0
   moveAxis: 1
@@ -894,7 +899,7 @@ MonoBehaviour:
   - {fileID: 2130898177}
   - {fileID: 1833978309}
   - {fileID: 1419586454}
-  targetPosition: {x: 0, y: 0, z: 0}
+  cursorPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &650287632
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,7 +912,7 @@ GameObject:
   - component: {fileID: 650287636}
   - component: {fileID: 650287635}
   - component: {fileID: 650287637}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Cube_4
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -1038,7 +1043,7 @@ GameObject:
   - component: {fileID: 786542146}
   - component: {fileID: 786542145}
   - component: {fileID: 786542148}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Cube
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -1135,7 +1140,7 @@ GameObject:
   - component: {fileID: 925195891}
   - component: {fileID: 925195890}
   - component: {fileID: 925195892}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Sphere_1
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -1541,7 +1546,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 50331703
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1811,7 +1816,7 @@ GameObject:
   - component: {fileID: 1181366217}
   - component: {fileID: 1181366216}
   - component: {fileID: 1181366218}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Sphere_3
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -2208,7 +2213,7 @@ GameObject:
   - component: {fileID: 1647764425}
   - component: {fileID: 1647764424}
   - component: {fileID: 1647764426}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Cube_3
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -2567,7 +2572,7 @@ GameObject:
   - component: {fileID: 1817509560}
   - component: {fileID: 1817509559}
   - component: {fileID: 1817509561}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Cube_1
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -2761,7 +2766,7 @@ GameObject:
   - component: {fileID: 1857303116}
   - component: {fileID: 1857303115}
   - component: {fileID: 1857303117}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Sphere_2
   m_TagString: Selectable
   m_Icon: {fileID: 0}
@@ -3025,7 +3030,7 @@ GameObject:
   - component: {fileID: 2086265881}
   - component: {fileID: 2086265880}
   - component: {fileID: 2086265882}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Sphere_4
   m_TagString: Selectable
   m_Icon: {fileID: 0}
