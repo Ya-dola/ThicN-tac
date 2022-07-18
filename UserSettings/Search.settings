@@ -7,6 +7,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.BDE7F5D3" = "t:mesh cub"
+	"OpenInspectorPreview.BDE7F5D3" = "0"
+	"currentGroup.BDE7F5D3" = "all"
 }
 providers = {
 	adb = {
@@ -53,6 +56,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"cub"
 ]
 searchItemFavorites = [
 ]
