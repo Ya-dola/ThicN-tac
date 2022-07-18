@@ -1,37 +1,19 @@
 using System;
-using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class DragDrop : MonoBehaviour
+public class GridDrop : DragDrop
 {
-    [Header("Enable Snapping")]
-    public bool snapMvmnt = false;
+    [Header("Inherited Properties")]
+    public float snapDistance = 1f;
 
-    public bool snapPlcmnt = false;
-
-    [Header("Movement Axis")]
-    public MoveAxisEnum moveAxis = MoveAxisEnum.ZAxis;
+    public List<Transform> gridPositions = new List<Transform>();
 
     [Header("Debug")]
-    public GameObject selectedObject = null;
+    public Vector3 targetPosition;
 
-    public Camera mainCam;
-
-    // Movement Directions Enum
-    public enum MoveAxisEnum
-    {
-        XAxis,
-        YAxis,
-        ZAxis
-    }
-
-    private void Awake()
-    {
-        mainCam = Camera.main;
-
-        selectedObject = null;
-    }
-
+    // Update is called once per frame
     private void Update()
     {
         // On Left Click
@@ -107,55 +89,21 @@ public class DragDrop : MonoBehaviour
                 movePos = snapPos(movePos);
 
             selectedObject.transform.position = movePos;
+
+            // Updating Target Pos for Debugging 
+            targetPosition = movePos;
+
+            // Snapping Object when close to Grid Points
+            float smallestDistanceSquared = snapDistance * snapDistance;
+
+            foreach (Transform gridPos in gridPositions)
+            {
+                if ((gridPos.position - movePos).sqrMagnitude < smallestDistanceSquared)
+                {
+                    selectedObject.transform.position = gridPos.position;
+                    smallestDistanceSquared = (gridPos.position - movePos).sqrMagnitude;
+                }
+            }
         }
-    }
-
-    // Get World Pos from Mouse Pos along Z axis
-    private protected Vector3 getWorldMouseZPos()
-    {
-        // Translate Mouse Position along Z axis
-        Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-            mainCam.WorldToScreenPoint(selectedObject.transform.position).z);
-
-        return mainCam.ScreenToWorldPoint(position);
-    }
-
-    // Get snap positions according to direction of movement
-    private protected Vector3 snapPos(Vector3 freeFormPos)
-    {
-        Vector3 returnVec = Vector3.zero;
-
-        switch (moveAxis)
-        {
-            case MoveAxisEnum.YAxis:
-                returnVec = new Vector3(Mathf.Round(freeFormPos.x), Mathf.Round(freeFormPos.y), freeFormPos.z);
-                break;
-            default:
-                returnVec = new Vector3(Mathf.Round(freeFormPos.x), freeFormPos.y, Mathf.Round(freeFormPos.z));
-                break;
-        }
-
-        return returnVec;
-    }
-
-    // Raycast from Camera 
-    private protected RaycastHit CastRay()
-    {
-        // Raycast Hit to return
-        RaycastHit hit;
-
-        Vector3 screenMousePosFar =
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCam.farClipPlane);
-
-        Vector3 screenMousePosNear =
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCam.nearClipPlane);
-
-        Vector3 worldMousePosFar = mainCam.ScreenToWorldPoint(screenMousePosFar);
-        Vector3 worldMousePosNear = mainCam.ScreenToWorldPoint(screenMousePosNear);
-
-        // Casting Ray from Camera in the Direction away from where the Camera is looking
-        Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit);
-
-        return hit;
     }
 }
