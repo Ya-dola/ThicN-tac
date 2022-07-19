@@ -31,7 +31,7 @@ public class DragDrop : MonoBehaviour
         ZAxis
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         mainCam = Camera.main;
 

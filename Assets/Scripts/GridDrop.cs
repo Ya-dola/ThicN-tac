@@ -13,6 +13,12 @@ public class GridDrop : DragDrop
     [Header("Debug")]
     public Vector3 startingPos;
 
+    protected override void Awake()
+     {
+         base.Awake();
+         
+     }
+
     // Update is called once per frame
     private void Update()
     {
