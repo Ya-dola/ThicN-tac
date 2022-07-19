@@ -11,7 +11,7 @@ public class GridDrop : DragDrop
     public List<Transform> gridPositions = new List<Transform>();
 
     [Header("Debug")]
-    public Vector3 cursorPosition;
+    public Vector3 startingPos;
 
     // Update is called once per frame
     private void Update()
@@ -32,40 +32,56 @@ public class GridDrop : DragDrop
 
                     // Assigning the object that was selected as the selected object until reset
                     selectedObject = hit.collider.gameObject;
+
+                    // Setting the Starting Position to Return if Selected Object was dropped incorrectly
+                    startingPos = selectedObject.transform.position;
+
+                    // Hide Cursor on Selecting Object
                     Cursor.visible = false;
                 }
             }
             // Drops Object if object already selected
             else
             {
-                var worldPosition = getWorldMouseZPos();
-
-                var dropPos = Vector3.zero;
-
-                // Drops the Object according to Mouse Position
-                switch (moveAxis)
+                // Check to see if object can be dropped in location
+                if (ValidDropConds())
                 {
-                    // Y Axis
-                    case MoveAxisEnum.YAxis:
-                        dropPos = new Vector3(worldPosition.x, worldPosition.y, 0f);
-                        break;
-                    // z Axis
-                    default:
-                        dropPos = new Vector3(worldPosition.x, 0f, worldPosition.z);
-                        break;
+                    var worldPosition = getWorldMouseZPos();
+                    var dropPos = Vector3.zero;
+
+                    // Drops the Object according to Mouse Position
+                    switch (moveAxis)
+                    {
+                        // Y Axis
+                        case MoveAxisEnum.YAxis:
+                            dropPos = new Vector3(worldPosition.x, worldPosition.y, 0f);
+                            break;
+                        // z Axis
+                        default:
+                            dropPos = new Vector3(worldPosition.x, 0f, worldPosition.z);
+                            break;
+                    }
+
+                    selectedObject.transform.position = dropPos;
+
+                    // Snapping Object to Grid Points
+                    SnapToGridPoint(ref dropPos);
+
+                    // Reset after Dropping the Object
+                    selectedObject = null;
+                    startingPos = Vector3.zero;
+                    Cursor.visible = true;
                 }
+                else
+                {
+                    // Dropping Object back to Original position
+                    selectedObject.transform.position = startingPos;
 
-                if (snapPlcmnt)
-                    dropPos = snapPos(dropPos);
-
-                selectedObject.transform.position = dropPos;
-
-                // Snapping Object to Grid Points
-                SnapToGridPoint(ref dropPos);
-
-                // Reset after Dropping the Object
-                selectedObject = null;
-                Cursor.visible = true;
+                    // Reset after Dropping the Object
+                    selectedObject = null;
+                    startingPos = Vector3.zero;
+                    Cursor.visible = true;
+                }
             }
         }
 
@@ -88,17 +104,31 @@ public class GridDrop : DragDrop
                     break;
             }
 
-            if (snapMvmnt)
-                movePos = snapPos(movePos);
-
             selectedObject.transform.position = movePos;
-
-            // Updating Cursor Pos for Debugging 
-            cursorPosition = movePos;
 
             // Snapping Object when close to Grid Points
             SnapToGridPoint(ref movePos);
         }
+    }
+
+    // Checks if all the dropping conditions are valid. Returns True if all are satisfied 
+    private bool ValidDropConds()
+    {
+        return ValidEndPos();
+    }
+
+    // Checking if End Position is one of the Possible Grid Positions
+    private bool ValidEndPos()
+    {
+        foreach (Transform gridPos in gridPositions)
+        {
+            if (gridPos.position.Equals(selectedObject.transform.position))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void SnapToGridPoint(ref Vector3 pos)
