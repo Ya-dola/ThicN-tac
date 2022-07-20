@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,10 @@ public class GridPosition : MonoBehaviour
 
     public void UpdatePosition(ShapeEnum shapeType, ShapeSizeEnum shapeSize)
     {
+        // To check if GridPos is can be updated or not
+        if (!CheckUpdateable())
+            return;
+
         occupied = true;
         occupiedShape = shapeType;
         occupiedShapeSize = shapeSize;
@@ -40,5 +45,17 @@ public class GridPosition : MonoBehaviour
         {
             GetComponent<MeshRenderer>().material = gvShapeO;
         }
+    }
+
+    // Checks if grid can be updated or not
+    public bool CheckUpdateable()
+    {
+        if (occupied)
+        {
+            // TODO - Logic for size difference 
+            return false;
+        }
+
+        return true;
     }
 }

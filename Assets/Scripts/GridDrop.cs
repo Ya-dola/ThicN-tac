@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class GridDrop : DragDrop
 {
-    [Header("Inherited Properties")]
-    public float snapDistance = 1f;
+    // [Header("Inherited Properties")]
+    // public float snapDistance = 1f;
 
     [Header("Debug")]
     public Vector3 startingPos;
@@ -46,26 +46,27 @@ public class GridDrop : DragDrop
                 // Check to see if object in Valid location to be dropped
                 if (ticTacToeGrid.ValidDropConds(ref selectedObject))
                 {
-                    var worldPosition = getWorldMouseZPos();
-                    var dropPos = Vector3.zero;
+                    // Old Method
+                    // var worldPosition = getWorldMouseZPos();
+                    // var dropPos = Vector3.zero;
 
-                    // Drops the Object according to Mouse Position
-                    switch (moveAxis)
-                    {
-                        // Y Axis
-                        case MoveAxisEnum.YAxis:
-                            dropPos = new Vector3(worldPosition.x, worldPosition.y, 0f);
-                            break;
-                        // z Axis
-                        default:
-                            dropPos = new Vector3(worldPosition.x, 0f, worldPosition.z);
-                            break;
-                    }
-
-                    selectedObject.transform.position = dropPos;
+                    // // Drops the Object according to Mouse Position
+                    // switch (moveAxis)
+                    // {
+                    //     // Y Axis
+                    //     case MoveAxisEnum.YAxis:
+                    //         dropPos = new Vector3(worldPosition.x, worldPosition.y, 0f);
+                    //         break;
+                    //     // z Axis
+                    //     default:
+                    //         dropPos = new Vector3(worldPosition.x, 0f, worldPosition.z);
+                    //         break;
+                    // }
+                    //
+                    // selectedObject.transform.position = dropPos;
 
                     // Snapping Object to Grid Points
-                    SnapToGridPoint(ref dropPos);
+                    // SnapToGridPoint(ref dropPos);
 
                     // Update Grid Position
                     var selectedShape = selectedObject.GetComponent<Shape>();
@@ -119,23 +120,23 @@ public class GridDrop : DragDrop
             selectedObject.transform.position = movePos;
 
             // Snapping Object when close to Grid Points
-            SnapToGridPoint(ref movePos);
+            // SnapToGridPoint(ref movePos);
         }
     }
 
     // Snaps Selected Shape to Grid Positions when close enough
-    public void SnapToGridPoint(ref Vector3 pos)
-    {
-        // Snapping Object when close to Grid Points
-        float smallestDistanceSquared = snapDistance * snapDistance;
-
-        foreach (GameObject gridPos in ticTacToeGrid.gridPositions)
-        {
-            if ((gridPos.transform.position - pos).sqrMagnitude < smallestDistanceSquared)
-            {
-                selectedObject.transform.position = gridPos.transform.position;
-                smallestDistanceSquared = (gridPos.transform.position - pos).sqrMagnitude;
-            }
-        }
-    }
+    // public void SnapToGridPoint(ref Vector3 pos)
+    // {
+    //     // Snapping Object when close to Grid Points
+    //     float smallestDistanceSquared = snapDistance * snapDistance;
+    //
+    //     foreach (GameObject gridPos in ticTacToeGrid.gridPositions)
+    //     {
+    //         if ((gridPos.transform.position - pos).sqrMagnitude < smallestDistanceSquared)
+    //         {
+    //             selectedObject.transform.position = gridPos.transform.position;
+    //             smallestDistanceSquared = (gridPos.transform.position - pos).sqrMagnitude;
+    //         }
+    //     }
+    // }
 }

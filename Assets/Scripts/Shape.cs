@@ -29,9 +29,12 @@ public class Shape : MonoBehaviour
         int collidersHit = Physics.OverlapSphereNonAlloc(transform.position, 0.5f, hits, gridLayer);
 
         // Fail safe Check if Colliding Properly
-        if (collidersHit > 0)
+        if (collidersHit > 0 && hits[0].gameObject.CompareTag("GridPos"))
         {
             hits[0].gameObject.GetComponent<GridPosition>().UpdatePosition(shapeType, shapeSize);
+
+            // Snap the Shape to the Position of the GridPos that it is Colliding with 
+            transform.position = hits[0].gameObject.transform.position;
         }
         else
         {

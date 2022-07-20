@@ -6,6 +6,15 @@ public class TicTacToeGrid : MonoBehaviour
 {
     public List<GameObject> gridPositions = new List<GameObject>();
 
+    public float rayDistBack = 1f;
+    public float raycastMaxDist = 10f;
+    public LayerMask gridLayer;
+
+    private void Awake()
+    {
+        gridLayer = LayerMask.GetMask("GridPositions");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +34,25 @@ public class TicTacToeGrid : MonoBehaviour
     // Checking if End Position is one of the Possible Grid Positions
     private bool ValidEndPos(ref GameObject selectedShape)
     {
-        foreach (GameObject gridPos in gridPositions)
+        // To start the ray Behind the shape slightly
+        var selectedShapePos = new Vector3(
+            selectedShape.transform.position.x,
+            selectedShape.transform.position.y,
+            selectedShape.transform.position.z - rayDistBack);
+
+        // Debug.DrawRay(selectedShapePos, Vector3.forward * raycastMaxDist, Color.red);
+
+        RaycastHit hit;
+        Physics.Raycast(selectedShapePos, Vector3.forward, out hit, raycastMaxDist, gridLayer);
+
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("GridPos"))
         {
-            if (gridPos.transform.position.Equals(selectedShape.transform.position))
-            {
-                return true;
-            }
+            print("<color=green>Success Hit</color>");
+            return true;
         }
 
-        print("<color=red>Shape is not placed</color>");
+        // Error Message
+        print("<color=red>Not Valid End Position</color>");
         return false;
     }
 }
