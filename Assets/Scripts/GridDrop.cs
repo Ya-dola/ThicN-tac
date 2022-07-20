@@ -66,9 +66,18 @@ public class GridDrop : DragDrop
 
                     // Snapping Object to Grid Points
                     SnapToGridPoint(ref dropPos);
-                    
+
                     // Update Grid Position
-                    selectedObject.GetComponent<Shape>().PlaceShape();
+                    var selectedShape = selectedObject.GetComponent<Shape>();
+
+                    // Fail Safe Check if Shape is selected or not
+                    if (selectedShape == null)
+                    {
+                        print("<color=red>SelectedShape is NULL</color>");
+                        return;
+                    }
+
+                    selectedShape.PlaceShape();
 
                     // Reset after Dropping the Object
                     selectedObject = null;

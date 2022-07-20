@@ -33,5 +33,9 @@ public class Shape : MonoBehaviour
         {
             hits[0].gameObject.GetComponent<GridPosition>().UpdatePosition(shapeType, shapeSize);
         }
+        else
+        {
+            print("<color=red>Shape Not Identifying Grid Position</color>");
+        }
     }
 }

@@ -33,6 +33,7 @@ public class TicTacToeGrid : MonoBehaviour
             }
         }
 
+        print("<color=red>Shape is not placed</color>");
         return false;
     }
 }
