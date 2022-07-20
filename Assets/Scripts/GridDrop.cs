@@ -8,16 +8,10 @@ public class GridDrop : DragDrop
     [Header("Inherited Properties")]
     public float snapDistance = 1f;
 
-    public List<Transform> gridPositions = new List<Transform>();
-
     [Header("Debug")]
     public Vector3 startingPos;
 
-    protected override void Awake()
-     {
-         base.Awake();
-         
-     }
+    public TicTacToeGrid ticTacToeGrid;
 
     // Update is called once per frame
     private void Update()
@@ -33,7 +27,7 @@ public class GridDrop : DragDrop
                 // If Raycast is Hitting an object's collider
                 if (hit.collider != null)
                 {
-                    if (!hit.collider.CompareTag("Selectable"))
+                    if (!hit.collider.CompareTag(selectableTag))
                         return;
 
                     // Assigning the object that was selected as the selected object until reset
@@ -49,8 +43,8 @@ public class GridDrop : DragDrop
             // Drops Object if object already selected
             else
             {
-                // Check to see if object can be dropped in location
-                if (ValidDropConds())
+                // Check to see if object in Valid location to be dropped
+                if (ticTacToeGrid.ValidDropConds(ref selectedObject))
                 {
                     var worldPosition = getWorldMouseZPos();
                     var dropPos = Vector3.zero;
@@ -72,6 +66,9 @@ public class GridDrop : DragDrop
 
                     // Snapping Object to Grid Points
                     SnapToGridPoint(ref dropPos);
+                    
+                    // Update Grid Position
+                    selectedObject.GetComponent<Shape>().PlaceShape();
 
                     // Reset after Dropping the Object
                     selectedObject = null;
@@ -117,37 +114,18 @@ public class GridDrop : DragDrop
         }
     }
 
-    // Checks if all the dropping conditions are valid. Returns True if all are satisfied 
-    private bool ValidDropConds()
-    {
-        return ValidEndPos();
-    }
-
-    // Checking if End Position is one of the Possible Grid Positions
-    private bool ValidEndPos()
-    {
-        foreach (Transform gridPos in gridPositions)
-        {
-            if (gridPos.position.Equals(selectedObject.transform.position))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
+    // Snaps Selected Shape to Grid Positions when close enough
     public void SnapToGridPoint(ref Vector3 pos)
     {
         // Snapping Object when close to Grid Points
         float smallestDistanceSquared = snapDistance * snapDistance;
 
-        foreach (Transform gridPos in gridPositions)
+        foreach (GameObject gridPos in ticTacToeGrid.gridPositions)
         {
-            if ((gridPos.position - pos).sqrMagnitude < smallestDistanceSquared)
+            if ((gridPos.transform.position - pos).sqrMagnitude < smallestDistanceSquared)
             {
-                selectedObject.transform.position = gridPos.position;
-                smallestDistanceSquared = (gridPos.position - pos).sqrMagnitude;
+                selectedObject.transform.position = gridPos.transform.position;
+                smallestDistanceSquared = (gridPos.transform.position - pos).sqrMagnitude;
             }
         }
     }

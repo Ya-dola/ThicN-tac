@@ -234,8 +234,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6f2e0117d62234482d49d00172d81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shapeType: 1
-  shapeSize: 0
+  shapeType: 2
+  shapeSize: 1
+  gridLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &94125918
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +383,7 @@ GameObject:
   m_Layer: 9
   m_Name: 0,2
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -590,7 +593,7 @@ GameObject:
   m_Layer: 9
   m_Name: 1,2
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -936,17 +939,8 @@ MonoBehaviour:
   selectedObject: {fileID: 0}
   mainCam: {fileID: 0}
   snapDistance: 1.55
-  gridPositions:
-  - {fileID: 1992524223}
-  - {fileID: 934933452}
-  - {fileID: 199909956}
-  - {fileID: 1479200239}
-  - {fileID: 1728334415}
-  - {fileID: 330829732}
-  - {fileID: 2130898177}
-  - {fileID: 1833978309}
-  - {fileID: 1419586454}
   startingPos: {x: 0, y: 0, z: 0}
+  ticTacToeGrid: {fileID: 1687679078}
 --- !u!1 &650287632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,8 +1182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6f2e0117d62234482d49d00172d81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shapeType: 0
-  shapeSize: 0
+  shapeType: 1
+  shapeSize: 1
+  gridLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &925195887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,7 +1300,7 @@ GameObject:
   m_Layer: 9
   m_Name: 0,1
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2027,7 +2024,7 @@ GameObject:
   m_Layer: 9
   m_Name: 2,2
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2177,7 +2174,7 @@ GameObject:
   m_Layer: 9
   m_Name: 1,1
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2417,6 +2414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1687679077}
+  - component: {fileID: 1687679078}
   m_Layer: 0
   m_Name: TicTacToeGrid
   m_TagString: Untagged
@@ -2442,6 +2440,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1687679078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687679076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9601b0a466b36cc419dabf89cbdafe60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridPositions:
+  - {fileID: 1992524222}
+  - {fileID: 934933451}
+  - {fileID: 199909955}
+  - {fileID: 1728334414}
+  - {fileID: 1479200238}
+  - {fileID: 330829731}
+  - {fileID: 2130898176}
+  - {fileID: 1833978308}
+  - {fileID: 1419586453}
 --- !u!1 &1713582513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2576,7 +2596,7 @@ GameObject:
   m_Layer: 9
   m_Name: 1,0
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2799,7 +2819,7 @@ GameObject:
   m_Layer: 9
   m_Name: 2,1
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3042,11 +3062,10 @@ GameObject:
   - component: {fileID: 1992524225}
   - component: {fileID: 1992524224}
   - component: {fileID: 1992524227}
-  - component: {fileID: 1992524228}
   m_Layer: 9
   m_Name: 0,0
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3129,21 +3148,6 @@ MeshFilter:
   m_GameObject: {fileID: 1992524222}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1992524227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992524222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a0795abe7aa882479a388bac390c4b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  occupied: 0
-  occupiedShape: 0
-  occupiedShapeSize: 0
---- !u!114 &1992524228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3305,7 +3309,7 @@ GameObject:
   m_Layer: 9
   m_Name: 2,0
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

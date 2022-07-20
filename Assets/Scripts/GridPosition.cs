@@ -18,4 +18,11 @@ public class GridPosition : MonoBehaviour
     void Update()
     {
     }
+
+    public void UpdatePosition(ShapeEnum shapeType, ShapeSizeEnum shapeSize)
+    {
+        occupied = true;
+        occupiedShape = shapeType;
+        occupiedShapeSize = shapeSize;
+    }
 }
