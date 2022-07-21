@@ -41,7 +41,6 @@ public class TicTacToeGrid : MonoBehaviour
             selectedShape.transform.position.z - rayDistBack);
 
         // Debug.DrawRay(selectedShapePos, Vector3.forward * raycastMaxDist, Color.red);
-
         RaycastHit hit;
         Physics.Raycast(selectedShapePos, Vector3.forward, out hit, raycastMaxDist, gridLayer);
 
