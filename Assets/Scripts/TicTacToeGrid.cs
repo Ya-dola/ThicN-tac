@@ -41,13 +41,19 @@ public class TicTacToeGrid : MonoBehaviour
             selectedShape.transform.position.z - rayDistBack);
 
         // Debug.DrawRay(selectedShapePos, Vector3.forward * raycastMaxDist, Color.red);
+
         RaycastHit hit;
         Physics.Raycast(selectedShapePos, Vector3.forward, out hit, raycastMaxDist, gridLayer);
 
-        if (hit.collider != null && hit.collider.gameObject.CompareTag("GridPos"))
+        var tempGridPos = hit.collider.gameObject;
+
+        if (hit.collider != null && tempGridPos.CompareTag("GridPos"))
         {
-            print("<color=green>Success Hit</color>");
-            return true;
+            if (tempGridPos.GetComponent<GridPosition>().CheckUpdateable())
+            {
+                print("<color=green>Success Hit and Placeable</color>");
+                return true;
+            }
         }
 
         // Error Message

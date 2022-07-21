@@ -28,7 +28,7 @@ public class Framerate : MonoBehaviour
                 Application.targetFrameRate = 60;
                 break;
         }
-        
+
         DontDestroyOnLoad(this);
     }
 }

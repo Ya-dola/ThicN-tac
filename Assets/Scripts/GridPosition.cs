@@ -26,12 +26,9 @@ public class GridPosition : MonoBehaviour
     {
     }
 
+    // Updates Details of the Grid Position
     public void UpdatePosition(ShapeEnum shapeType, ShapeSizeEnum shapeSize)
     {
-        // To check if GridPos is can be updated or not
-        if (!CheckUpdateable())
-            return;
-
         occupied = true;
         occupiedShape = shapeType;
         occupiedShapeSize = shapeSize;
