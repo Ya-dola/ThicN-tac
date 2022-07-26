@@ -60,4 +60,26 @@ public class TicTacToeGrid : MonoBehaviour
         print("<color=red>Not Valid End Position</color>");
         return false;
     }
+
+    // Check If Possible Win Conditions are met
+    public bool CheckWin()
+    {
+        return CheckPositionsMatching(0, 1, 2);
+    }
+
+    private bool CheckPositionsMatching(int x, int y, int z)
+    {
+        ShapeEnum xPosShape = gridPositions[x].gameObject.GetComponent<GridPosition>().occupiedShape;
+        ShapeEnum yPosShape = gridPositions[y].gameObject.GetComponent<GridPosition>().occupiedShape;
+        ShapeEnum zPosShape = gridPositions[z].gameObject.GetComponent<GridPosition>().occupiedShape;
+
+        if (xPosShape.Equals(yPosShape) && xPosShape.Equals(zPosShape))
+        {
+            print("<color=green>Shapes Match</color>");
+            return true;
+        }
+
+        print("<color=yellow>Shapes not matching in Positions: (" + x + "," + y + "," + z + ")</color>");
+        return false;
+    }
 }

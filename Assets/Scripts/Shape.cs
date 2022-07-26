@@ -33,7 +33,7 @@ public class Shape : MonoBehaviour
         {
             hits[0].gameObject.GetComponent<GridPosition>().UpdatePosition(shapeType, shapeSize);
 
-            // Snap the Shape to the Position of the GridPos that it is Colliding with 
+            // Snap the Shape to the Position of the GridPos that it is Colliding with
             transform.position = hits[0].gameObject.transform.position;
         }
         else

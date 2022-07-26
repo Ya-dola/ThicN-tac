@@ -78,12 +78,19 @@ public class GridDrop : DragDrop
                         return;
                     }
 
+                    // Placing Shape onto Board
                     selectedShape.PlaceShape();
 
                     // Reset after Dropping the Object
                     selectedObject = null;
                     startingPos = Vector3.zero;
                     Cursor.visible = true;
+
+                    // Check if Possible Win Conditions are met
+                    if (ticTacToeGrid.CheckWin())
+                    {
+                        print("<color=blue>Game WON!</color>");
+                    }
                 }
                 else
                 {
