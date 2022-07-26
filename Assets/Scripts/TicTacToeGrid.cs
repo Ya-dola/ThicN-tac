@@ -64,7 +64,14 @@ public class TicTacToeGrid : MonoBehaviour
     // Check If Possible Win Conditions are met
     public bool CheckWin()
     {
-        return CheckPositionsMatching(0, 1, 2);
+        return CheckPositionsMatching(0, 1, 2) ||
+               CheckPositionsMatching(3, 4, 5) ||
+               CheckPositionsMatching(6, 7, 8) ||
+               CheckPositionsMatching(0, 3, 6) ||
+               CheckPositionsMatching(1, 4, 7) ||
+               CheckPositionsMatching(2, 5, 8) ||
+               CheckPositionsMatching(0, 4, 8) ||
+               CheckPositionsMatching(2, 4, 6);
     }
 
     private bool CheckPositionsMatching(int x, int y, int z)
