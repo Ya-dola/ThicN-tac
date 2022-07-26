@@ -81,7 +81,8 @@ public class GridDrop : DragDrop
                     // Placing Shape onto Board
                     selectedShape.PlaceShape();
 
-                    // Reset after Dropping the Object
+                    // Reset after Dropping the Object to Correct Position
+                    selectedObject.tag = "Untagged"; // Changing Tag To not be picked up again
                     selectedObject = null;
                     startingPos = Vector3.zero;
                     Cursor.visible = true;
@@ -97,7 +98,7 @@ public class GridDrop : DragDrop
                     // Dropping Object back to Original position
                     selectedObject.transform.position = startingPos;
 
-                    // Reset after Dropping the Object
+                    // Reset after Dropping the Object to Incorrect Position
                     selectedObject = null;
                     startingPos = Vector3.zero;
                     Cursor.visible = true;
