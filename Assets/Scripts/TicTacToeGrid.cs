@@ -74,6 +74,7 @@ public class TicTacToeGrid : MonoBehaviour
                CheckPositionsMatching(2, 4, 6);
     }
 
+    // Checks if the positions provided have Matching Shapes on them
     private bool CheckPositionsMatching(int x, int y, int z)
     {
         ShapeEnum xPosShape = gridPositions[x].gameObject.GetComponent<GridPosition>().occupiedShape;
