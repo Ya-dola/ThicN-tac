@@ -69,6 +69,7 @@ public class GridDrop : DragDrop
                     // SnapToGridPoint(ref dropPos);
 
                     // Update Grid Position
+
                     var selectedShape = selectedObject.GetComponent<Shape>();
 
                     // Fail Safe Check if Shape is selected or not

@@ -49,7 +49,8 @@ public class GridPosition : MonoBehaviour
     {
         if (occupied)
         {
-            // TODO - Logic for size difference 
+            // TODO - Write Logic for size difference
+
             return false;
         }
 
