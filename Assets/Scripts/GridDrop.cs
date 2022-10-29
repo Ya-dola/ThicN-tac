@@ -13,6 +13,8 @@ public class GridDrop : DragDrop
 
     public TicTacToeGrid ticTacToeGrid;
 
+    public TurnControl turnControl;
+
     // Update is called once per frame
     private void Update()
     {
@@ -27,7 +29,9 @@ public class GridDrop : DragDrop
                 // If Raycast is Hitting an object's collider
                 if (hit.collider != null)
                 {
-                    if (!hit.collider.CompareTag(selectableTag))
+                    // Check if colliding with a selectable and playable selectable
+                    if (!hit.collider.CompareTag(selectableTag) ||
+                        !hit.collider.GetComponent<Shape>().shapeType.Equals(turnControl.plyrShapeType))
                         return;
 
                     // Assigning the object that was selected as the selected object until reset
@@ -93,6 +97,9 @@ public class GridDrop : DragDrop
                     {
                         print("<color=blue>Game WON!</color>");
                     }
+
+                    // Changes Turn of Player to the other Shape
+                    turnControl.ChangeActivePlayer();
                 }
                 else
                 {
