@@ -49,7 +49,7 @@ public class TicTacToeGrid : MonoBehaviour
 
         if (hit.collider != null && tempGridPos.CompareTag("GridPos"))
         {
-            if (tempGridPos.GetComponent<GridPosition>().CheckUpdateable())
+            if (tempGridPos.GetComponent<GridPosition>().CheckUpdateable(selectedShape.GetComponent<Shape>()))
             {
                 print("<color=green>Success Hit and Placeable</color>");
                 return true;

@@ -45,15 +45,21 @@ public class GridPosition : MonoBehaviour
     }
 
     // Checks if grid can be updated or not
-    public bool CheckUpdateable()
+    public bool CheckUpdateable(Shape selectedShape)
     {
-        if (occupied)
+        if (!occupied)
         {
             // TODO - Write Logic for size difference
 
-            return false;
+            // Fail Safe for Large Shapes that cannot be overriden 
+            if (occupiedShapeSize.Equals(ShapeSizeEnum.Large))
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 }
