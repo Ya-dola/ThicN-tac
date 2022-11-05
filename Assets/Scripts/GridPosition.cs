@@ -49,7 +49,11 @@ public class GridPosition : MonoBehaviour
     {
         if (!occupied)
         {
-            // TODO - Write Logic for size difference
+            // Fail Safe to not be able to occupy a slot from the same shape
+            if (occupiedShape.Equals(selectedShape.shapeType))
+            {
+                return false;
+            }
 
             // Fail Safe for Large Shapes that cannot be overriden 
             if (occupiedShapeSize.Equals(ShapeSizeEnum.Large))
@@ -57,9 +61,27 @@ public class GridPosition : MonoBehaviour
                 return false;
             }
 
+            // Medium gets Overtaken by Large
+            if (occupiedShapeSize.Equals(ShapeSizeEnum.Medium) &&
+                selectedShape.shapeSize.Equals(ShapeSizeEnum.Large))
+            {
+                return true;
+            }
+
+            // Small gets Overtaken by Medium and Large
+            if (occupiedShapeSize.Equals(ShapeSizeEnum.Small) &&
+                (selectedShape.shapeSize.Equals(ShapeSizeEnum.Large) ||
+                 selectedShape.shapeSize.Equals(ShapeSizeEnum.Medium)))
+            {
+                return true;
+            }
+
+            // Not occupied previously
             return true;
         }
 
+        // Fail safe if none of the conditions are met
+        print("<color=yellow>BUG CheckUpdateable</color>");
         return false;
     }
 }
