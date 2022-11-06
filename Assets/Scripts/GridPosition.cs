@@ -81,7 +81,7 @@ public class GridPosition : MonoBehaviour
         }
 
         // Fail safe if none of the conditions are met
-        print("<color=yellow>BUG CheckUpdateable</color>");
+        print("<color=yellow>DEBUG: Check Updateable Conditions Not Met</color>");
         return false;
     }
 }

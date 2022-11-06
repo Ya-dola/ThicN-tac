@@ -38,7 +38,7 @@ public class Shape : MonoBehaviour
         }
         else
         {
-            print("<color=red>Shape Not Identifying Grid Position</color>");
+            print("<color=red>DEBUG: Shape Not Identifying Grid Position</color>");
         }
     }
 }

@@ -95,7 +95,7 @@ public class GridDrop : DragDrop
                     // Check if Possible Win Conditions are met
                     if (ticTacToeGrid.CheckWin())
                     {
-                        print("<color=blue>Game WON!</color>");
+                        print("<color=yellow>DEBUG: Add Win Screen Menu Logic</color>");
                     }
 
                     // Changes Turn of Player to the other Shape
