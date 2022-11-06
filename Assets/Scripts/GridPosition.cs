@@ -47,36 +47,36 @@ public class GridPosition : MonoBehaviour
     // Checks if grid can be updated or not
     public bool CheckUpdateable(Shape selectedShape)
     {
+        // Not occupied previously
         if (!occupied)
         {
-            // Fail Safe to not be able to occupy a slot from the same shape
-            if (occupiedShape.Equals(selectedShape.shapeType))
-            {
-                return false;
-            }
+            return true;
+        }
 
-            // Fail Safe for Large Shapes that cannot be overriden 
-            if (occupiedShapeSize.Equals(ShapeSizeEnum.Large))
-            {
-                return false;
-            }
+        // Fail Safe to NOT be able to occupy a slot from the same shape
+        if (occupiedShape.Equals(selectedShape.shapeType))
+        {
+            return false;
+        }
 
-            // Medium gets Overtaken by Large
-            if (occupiedShapeSize.Equals(ShapeSizeEnum.Medium) &&
-                selectedShape.shapeSize.Equals(ShapeSizeEnum.Large))
-            {
-                return true;
-            }
+        // Fail Safe for Large Shapes that cannot be overriden 
+        if (occupiedShapeSize.Equals(ShapeSizeEnum.Large))
+        {
+            return false;
+        }
 
-            // Small gets Overtaken by Medium and Large
-            if (occupiedShapeSize.Equals(ShapeSizeEnum.Small) &&
-                (selectedShape.shapeSize.Equals(ShapeSizeEnum.Large) ||
-                 selectedShape.shapeSize.Equals(ShapeSizeEnum.Medium)))
-            {
-                return true;
-            }
+        // Medium gets Overtaken by Large
+        if (occupiedShapeSize.Equals(ShapeSizeEnum.Medium) &&
+            selectedShape.shapeSize.Equals(ShapeSizeEnum.Large))
+        {
+            return true;
+        }
 
-            // Not occupied previously
+        // Small gets Overtaken by Medium and Large
+        if (occupiedShapeSize.Equals(ShapeSizeEnum.Small) &&
+            (selectedShape.shapeSize.Equals(ShapeSizeEnum.Large) ||
+             selectedShape.shapeSize.Equals(ShapeSizeEnum.Medium)))
+        {
             return true;
         }
 
