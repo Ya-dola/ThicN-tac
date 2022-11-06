@@ -8,10 +8,12 @@ public class GridPosition : MonoBehaviour
     [Header("Shape Details")]
     public bool occupied;
 
-    public ShapeEnum occupiedShape;
+    public ShapeEnum occupiedShapeType;
     public ShapeSizeEnum occupiedShapeSize;
 
-    [Header("Temporary Visuals")]
+    public Shape occupiedShape;
+
+    [Header("Debug Visuals")]
     public Material gvShapeX;
 
     public Material gvShapeO;
@@ -26,35 +28,49 @@ public class GridPosition : MonoBehaviour
     {
     }
 
-    // Updates Details of the Grid Position
-    public void UpdatePosition(ShapeEnum shapeType, ShapeSizeEnum shapeSize)
+    // Logic for Grid Position to Occupy Shape
+    private void OccupyShape(Shape shape)
     {
         occupied = true;
-        occupiedShape = shapeType;
-        occupiedShapeSize = shapeSize;
+        occupiedShapeType = shape.shapeType;
+        occupiedShapeSize = shape.shapeSize;
+        occupiedShape = shape;
 
-        // Temporary Visuals
-        if (occupiedShape == ShapeEnum.X)
+        // Assigning Debug Visuals
+        GetComponent<MeshRenderer>().material = occupiedShapeType == ShapeEnum.X ? gvShapeX : gvShapeO;
+    }
+
+    // Updates Details of the Grid Position
+    public void UpdatePosition(Shape shape)
+    {
+        // Not Occupied previously logic
+        if (!occupied)
         {
-            GetComponent<MeshRenderer>().material = gvShapeX;
+            OccupyShape(shape);
         }
+        // Already Occupied Logic
         else
         {
-            GetComponent<MeshRenderer>().material = gvShapeO;
+            // Call Take Over Logic for Existing Shape
+            occupiedShape.TakeOverShape();
+
+            OccupyShape(shape);
         }
     }
 
     // Checks if grid can be updated or not
     public bool CheckUpdateable(Shape selectedShape)
     {
-        // Not occupied previously
+        // Not occupied previously logic
         if (!occupied)
         {
             return true;
         }
 
+        // Already Occupied logic
+
         // Fail Safe to NOT be able to occupy a slot from the same shape
-        if (occupiedShape.Equals(selectedShape.shapeType))
+        if (occupiedShapeType.Equals(selectedShape.shapeType))
         {
             return false;
         }
@@ -81,7 +97,7 @@ public class GridPosition : MonoBehaviour
         }
 
         // Fail safe if none of the conditions are met
-        print("<color=yellow>DEBUG: Check Updateable Conditions Not Met</color>");
+        print("<color=yellow>DEBUG: CheckUpdateable Conditions Not Met</color>");
         return false;
     }
 }

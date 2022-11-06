@@ -23,6 +23,7 @@ public class Shape : MonoBehaviour
     {
     }
 
+    // Logic for Placing the Shape
     public void PlaceShape()
     {
         Collider[] hits = new Collider[1];
@@ -31,7 +32,7 @@ public class Shape : MonoBehaviour
         // Fail safe Check if Colliding Properly
         if (collidersHit > 0 && hits[0].gameObject.CompareTag("GridPos"))
         {
-            hits[0].gameObject.GetComponent<GridPosition>().UpdatePosition(shapeType, shapeSize);
+            hits[0].gameObject.GetComponent<GridPosition>().UpdatePosition(this);
 
             // Snap the Shape to the Position of the GridPos that it is Colliding with
             transform.position = hits[0].gameObject.transform.position;
@@ -40,5 +41,12 @@ public class Shape : MonoBehaviour
         {
             print("<color=red>DEBUG: Shape Not Identifying Grid Position</color>");
         }
+    }
+
+    // Logic for Taking Over Shape from Position
+    public void TakeOverShape()
+    {
+        // Hide the Shape
+        gameObject.SetActive(false);
     }
 }
