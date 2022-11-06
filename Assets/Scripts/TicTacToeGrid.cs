@@ -51,13 +51,13 @@ public class TicTacToeGrid : MonoBehaviour
         {
             if (tempGridPos.GetComponent<GridPosition>().CheckUpdateable(selectedShape.GetComponent<Shape>()))
             {
-                print("<color=green>Success Hit and Placeable</color>");
+                print("<color=green>DEBUG: Success Hit and Placeable</color>");
                 return true;
             }
         }
 
         // Error Message
-        print("<color=red>Not Valid End Position</color>");
+        print("<color=red>DEBUG: Not Valid End Position</color>");
         return false;
     }
 
@@ -81,13 +81,20 @@ public class TicTacToeGrid : MonoBehaviour
         ShapeEnum yPosShape = gridPositions[y].gameObject.GetComponent<GridPosition>().occupiedShape;
         ShapeEnum zPosShape = gridPositions[z].gameObject.GetComponent<GridPosition>().occupiedShape;
 
-        if (xPosShape.Equals(yPosShape) && xPosShape.Equals(zPosShape))
+        // Only Perform Checks if positions involved are not NONE
+        if (!xPosShape.Equals(ShapeEnum.None) ||
+            !yPosShape.Equals(ShapeEnum.None) ||
+            !zPosShape.Equals(ShapeEnum.None))
         {
-            print("<color=green>Shapes Match</color>");
-            return true;
+            // Checks if Positions in X are Matching Y and Z
+            if (xPosShape.Equals(yPosShape) && xPosShape.Equals(zPosShape))
+            {
+                print("<color=lightblue>DEBUG: Game WON!</color>");
+                return true;
+            }
         }
 
-        print("<color=yellow>Shapes not matching in Positions: (" + x + "," + y + "," + z + ")</color>");
+        print("<color=yellow>DEBUG: Shapes not matching in Positions: (" + x + "," + y + "," + z + ")</color>");
         return false;
     }
 }
