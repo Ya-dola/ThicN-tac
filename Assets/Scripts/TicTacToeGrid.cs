@@ -12,7 +12,7 @@ public class TicTacToeGrid : MonoBehaviour
 
     private void Awake()
     {
-        gridLayer = LayerMask.GetMask("GridPositions");
+        gridLayer = LayerMask.GetMask(LayersNTags.LayerGridPositions);
     }
 
     // Start is called before the first frame update
@@ -47,7 +47,7 @@ public class TicTacToeGrid : MonoBehaviour
 
         var tempGridPos = hit.collider.gameObject;
 
-        if (hit.collider != null && tempGridPos.CompareTag("GridPos"))
+        if (hit.collider != null && tempGridPos.CompareTag(LayersNTags.TagGridPos))
         {
             if (tempGridPos.GetComponent<GridPosition>().CheckUpdateable(selectedShape.GetComponent<Shape>()))
             {

@@ -15,7 +15,7 @@ public class Shape : MonoBehaviour
 
     private void Awake()
     {
-        gridLayer = LayerMask.GetMask("GridPositions");
+        gridLayer = LayerMask.GetMask(LayersNTags.LayerGridPositions);
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class Shape : MonoBehaviour
         int collidersHit = Physics.OverlapSphereNonAlloc(transform.position, 0.5f, hits, gridLayer);
 
         // Fail safe Check if Colliding Properly
-        if (collidersHit > 0 && hits[0].gameObject.CompareTag("GridPos"))
+        if (collidersHit > 0 && hits[0].gameObject.CompareTag(LayersNTags.TagGridPos))
         {
             hits[0].gameObject.GetComponent<GridPosition>().UpdatePosition(this);
 

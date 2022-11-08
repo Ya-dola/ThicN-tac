@@ -30,7 +30,7 @@ public class GridDrop : DragDrop
                 if (hit.collider != null)
                 {
                     // Check if colliding with a selectable and playable selectable
-                    if (!hit.collider.CompareTag(selectableTag) ||
+                    if (!hit.collider.CompareTag(LayersNTags.TagSelectable) ||
                         !hit.collider.GetComponent<Shape>().shapeType.Equals(turnControl.plyrShapeType))
                         return;
 
@@ -139,6 +139,8 @@ public class GridDrop : DragDrop
             // SnapToGridPoint(ref movePos);
         }
     }
+
+    // Commented out Logic
 
     // Snaps Selected Shape to Grid Positions when close enough
     // public void SnapToGridPoint(ref Vector3 pos)
